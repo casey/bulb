@@ -14,10 +14,10 @@ dir=tmp/$slug
 mkdir -p $dir
 
 cp $bin $dir
-ssh bulb@$host mkdir -p deploy
-scp -r $dir bulb@$host:deploy/$slug
+ssh -o StrictHostKeyChecking=no bulb@$host mkdir -p deploy
+scp -o StrictHostKeyChecking=no -r $dir bulb@$host:deploy/$slug
 
-ssh bulb@$host << EOF
+ssh -o StrictHostKeyChecking=no bulb@$host << EOF
 
 set -euxo pipefail
 
@@ -25,6 +25,9 @@ chmod +x deploy/$slug/bulb
 mkdir -p bin
 rm -f bin/bulb
 ln -s ~/deploy/$slug/bulb bin/bulb
+
 sudo systemctl restart bulb.service
+
+sudo systemctl status bulb.service || true
 
 EOF
