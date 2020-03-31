@@ -3,6 +3,7 @@
 set -euxo pipefail
 
 curl https://www.google.com
+curl -6 https://www.google.com
 exit
 
 cargo build --release
