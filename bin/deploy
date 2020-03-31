@@ -14,9 +14,9 @@ dir=tmp/$slug
 mkdir -p $dir
 cp $bin $dir
 
-ping -6 $host
+ping6 -c 1 $host
 
-ssh -6 bulb@$host mkdir deploy
+ssh -6 bulb@$host mkdir -p deploy
 
 scp -6 -r $dir bulb@$host:deploy/$slug
 
