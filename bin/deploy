@@ -13,11 +13,11 @@ dir=tmp/$slug
 mkdir -p $dir
 cp $bin $dir
 
-ssh bulb@bulb.tulip.farm mkdir deploy
+ssh -6 bulb@bulb.tulip.farm mkdir deploy
 
-scp -r $dir bulb@bulb.tulip.farm:deploy/$slug
+scp -6 -r $dir bulb@bulb.tulip.farm:deploy/$slug
 
-ssh bulb@bulb.tulip.farm << EOF
+ssh -6 bulb@bulb.tulip.farm << EOF
 
 set -euxo pipefail
 
