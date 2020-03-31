@@ -76,6 +76,10 @@ jobs:
     - name: Format
       run: cargo +nightly fmt --all -- --check
 
+    - uses: webfactory/ssh-agent@v0.2.0
+      with:
+        ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
     - name: Deploy
       if: github.ref == 'refs/heads/master'
       run: ./bin/deploy
