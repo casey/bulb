@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+! grep --color -REni 'FIXME|TODO|XXX|todo!|#\[ignore]' src
