@@ -36,8 +36,12 @@ deploy:
 ssh:
 	ssh root@bulb.tulip.farm
 
+create-user:
+	ssh root@bulb.tulip.farm "adduser --disabled-password --gecos '' bulb"
+
 install-unit:
 	scp bulb.service root@bulb.tulip.farm:/etc/systemd/system/bulb.service
+	ssh root@bulb.tulip.farm sudo systemctl start bulb.service
 
 install-sudoers:
 	scp bulb.sudoers root@bulb.tulip.farm:/etc/sudoers.d/bulb

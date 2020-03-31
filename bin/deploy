@@ -2,10 +2,6 @@
 
 set -euxo pipefail
 
-curl https://www.google.com
-curl -6 https://www.google.com
-exit
-
 cargo build --release
 
 host=bulb.tulip.farm
@@ -18,11 +14,11 @@ dir=tmp/$slug
 mkdir -p $dir
 cp $bin $dir
 
-ssh -6 bulb@$host mkdir -p deploy
+ssh bulb@$host mkdir -p deploy
 
-scp -6 -r $dir bulb@$host:deploy/$slug
+scp -r $dir bulb@$host:deploy/$slug
 
-ssh -6 bulb@$host << EOF
+ssh bulb@$host << EOF
 
 set -euxo pipefail
 
