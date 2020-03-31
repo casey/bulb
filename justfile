@@ -41,7 +41,8 @@ create-user:
 
 install-unit:
 	scp bulb.service root@bulb.tulip.farm:/etc/systemd/system/bulb.service
-	ssh root@bulb.tulip.farm sudo systemctl start bulb.service
+	ssh root@bulb.tulip.farm sudo systemctl daemon-reload
+	ssh root@bulb.tulip.farm sudo systemctl restart bulb.service
 
 install-sudoers:
 	scp bulb.sudoers root@bulb.tulip.farm:/etc/sudoers.d/bulb
