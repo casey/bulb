@@ -14,10 +14,13 @@ dir=tmp/$slug
 mkdir -p $dir
 
 cp $bin $dir
-ssh -o StrictHostKeyChecking=no bulb@$host mkdir -p deploy
-scp -o StrictHostKeyChecking=no -r $dir bulb@$host:deploy/$slug
 
-ssh -o StrictHostKeyChecking=no bulb@$host << EOF
+ssh-keyscan $host >> ~/.ssh/known_hosts
+
+ssh bulb@$host mkdir -p deploy
+scp -r $dir bulb@$host:deploy/$slug
+
+ssh bulb@$host << EOF
 
 set -euxo pipefail
 
