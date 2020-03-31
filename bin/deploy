@@ -11,7 +11,7 @@ hash=`shasum -a 256 $bin | awk '{print $1}'`
 slug=$timestamp-$revision-$hash
 dir=tmp/$slug
 mkdir -p $dir
-cp target/release/bulb $dir
+cp $bin $dir
 
 ssh bulb@bulb.tulip.farm mkdir deploy
 

@@ -7,6 +7,26 @@ run:
 fmt:
 	cargo +nightly fmt --all
 
+test:
+	cargo test --all
+
+clippy:
+	cargo clippy --all
+
+lint:
+	./bin/lint
+
+push: check
+	! git branch | grep '* master'
+	git push github
+
+pr: push
+	hub pull-request -o
+
+check: test clippy lint
+	git diff --no-ext-diff --quiet --exit-code
+	cargo +nightly fmt --all -- --check
+
 ping:
 	ping6 bulb.tulip.farm
 
