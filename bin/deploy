@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+cargo build --release
+
+bin=target/release/bulb
+timestamp=`date +%s`
+revision=`git rev-parse --verify HEAD`
+hash=`shasum -a 256 $bin | awk '{print $1}'`
+slug=$timestamp-$revision-$hash
+dir=tmp/$slug
+mkdir -p $dir
+cp target/release/bulb $dir
+
+ssh bulb@bulb.tulip.farm mkdir deploy
+
+scp -r $dir bulb@bulb.tulip.farm:deploy/$slug
+
+ssh bulb@bulb.tulip.farm << EOF
+
+set -euxo pipefail
+
+chmod +x deploy/$slug/bulb
+mkdir -p bin
+rm -f bin/bulb
+ln -s ~/deploy/$slug/bulb bin/bulb
+sudo systemctl restart bulb.service
+
+EOF

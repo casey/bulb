@@ -1,0 +1,14 @@
+[Unit]
+Description=Bulb bot service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=bulb
+ExecStart=/home/bulb/bin/bulb
+
+[Install]
+WantedBy=multi-user.target

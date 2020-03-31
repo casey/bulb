@@ -1,0 +1,4 @@
+bulb ALL=NOPASSWD:/usr/bin/systemctl restart bulb.service
+bulb ALL=NOPASSWD:/usr/bin/systemctl start bulb.service
+bulb ALL=NOPASSWD:/usr/bin/systemctl status bulb.service
+bulb ALL=NOPASSWD:/usr/bin/systemctl stop bulb.service
