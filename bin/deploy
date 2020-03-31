@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-cargo build --release
+# cargo build --release
 
 host=bulb.tulip.farm
 bin=target/release/bulb
@@ -14,15 +14,7 @@ dir=tmp/$slug
 mkdir -p $dir
 cp $bin $dir
 
-ping -c 1 google.com
-traceroute google.com
-
-ping6 -c 1 google.com
-traceroute6 google.com
-
-traceroute6 -q1 $host
-
-ping6 -c 1 $host
+curl https://www.google.com
 
 ssh -6 bulb@$host mkdir -p deploy
 
